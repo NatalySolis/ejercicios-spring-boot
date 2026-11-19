@@ -1,0 +1,45 @@
+@api = http://localhost:80880/api/productos
+### 1. Listar(200)
+GET {{api}}
+
+### 2. Obtener uno(200)
+GET {{api}}/2
+
+###3. No existe(404)
+GET {{api}}/99
+
+### 4. Crear(201)
+POST {{api}}
+Content-Type: application/json
+
+{"nombre": "Camára web HD", "precio":  29.90, "stock":8}
+
+### 5. Crear sin nombre(400)
+POST {{api}}
+Content-Type: application/json
+
+{"nombre": "", "precio": 10, "stock": 1}
+
+### 6. Precio inválido (400)
+POST {{api}}
+Content-Type: application/json
+
+{ "nombre": "Cable HDMI", "precio": -5, "stock": 3 }
+
+### 7. Actualizar (200)
+PUT {{api}}/4
+Content-Type: application/json
+
+{ "nombre": "Cámara web Full HD", "precio": 34.90, "stock": 8 }
+
+### 8. Actualizar uno que no existe (404)
+PUT {{api}}/99
+Content-Type: application/json
+
+{ "nombre": "Nada", "precio": 1, "stock": 1 }
+
+### 9. Eliminar (204)
+DELETE {{api}}/3
+
+### 10. Eliminar otra vez (404)
+DELETE {{api}}/3

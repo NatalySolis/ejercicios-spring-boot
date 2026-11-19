@@ -1,0 +1,69 @@
+@baseUrl = http://localhost:8080/api/libros
+
+### 1. Listar todos los libros (200)
+GET {{baseUrl}}
+
+### 2. Listar libros disponibles (200)
+GET {{baseUrl}}/disponibles
+
+### 3. Ver estadísticas de libros (200)
+GET {{baseUrl}}/estadisticas
+
+### 4. Buscar libro existente por ID (200)
+GET {{baseUrl}}/1
+
+### 5. Buscar libro inexistente por ID (404)
+GET {{baseUrl}}/999
+
+### 6. Crear libro válido (201)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id": 6,
+  "titulo": "Diseño de APIs REST",
+  "autor": "Roy Fielding",
+  "prestado": false
+}
+
+### 7. Crear libro inválido / título vacío (400)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id": 7,
+  "titulo": "",
+  "autor": "Autor Desconocido",
+  "prestado": false
+}
+
+### 8. Actualizar libro existente (200)
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "titulo": "Clean Code (Edición Revisada)",
+  "autor": "Robert C. Martin",
+  "prestado": false
+}
+
+### 9. Actualizar libro inexistente (404)
+PUT {{baseUrl}}/999
+Content-Type: application/json
+
+{
+  "id": 999,
+  "titulo": "No existe",
+  "autor": "Nadie",
+  "prestado": false
+}
+
+### 10. Intentar eliminar libro prestado -> ID 4 está prestado (409)
+DELETE {{baseUrl}}/4
+
+### 11. Eliminar libro inexistente (404)
+DELETE {{baseUrl}}/999
+
+### 12. Eliminar libro disponible -> ID 3 no está prestado (204)
+DELETE {{baseUrl}}/3
